@@ -18,6 +18,6 @@
                 &kp X   &kp Y   &kp Z
                 &kp I   &kp J   &kp K
             >;
-        }
+        };
     };
 };
