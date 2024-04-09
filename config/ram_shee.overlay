@@ -1,24 +1,46 @@
-#include <dt-bindings/zmk/matrix_transform.h>
+/*
+ * Copyright (c) 2022 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
-/ {
-    chosen {
-        zmk,kscan = &kscan0;
-    };
+ #include <behaviors.dtsi>
+ #include <dt-bindings/zmk/keys.h>
+ #include <dt-bindings/zmk/matrix_transform.h>
+ 
+ 
+ / {
+ 
+     chosen {
+         zmk,kscan = &basic_scan;
+         zmk,matrix_transform = &basic_transform;
+     };
+ 
+     basic_scan: kscan {
+         compatible = "zmk,kscan-gpio-matrix";
+         diode-direction = "col2row";
+ 
+         col-gpios
+             = <&pico_header 19 GPIO_ACTIVE_HIGH>
+             , <&pico_header 20 GPIO_ACTIVE_HIGH>
+             , <&pico_header 21 GPIO_ACTIVE_HIGH>
+             ;
+ 
+         row-gpios
+             = <&pico_header 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+             , <&pico_header 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+             ;
+     };
+ 
+     basic_transform: matrix_transform{
+         compatible = "zmk,matrix_transform";
+         rows = <2>;
+         columns = <3>;
 
-    kscan0: kscan_0 {
-        compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
-        wakeup-source;
-
-        col-gpios
-            = <&pico_header 19 GPIO_ACTIVE_HIGH>
-            , <&pico_header 20 GPIO_ACTIVE_HIGH>
-            , <&pico_header 21 GPIO_ACTIVE_HIGH>
-            ;
-
-        row-gpios
-            = <&pico_header 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&pico_header 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            ;
-    };
-};
+         map = <
+            RC(0,0) RC(0,1) RC(0,2)
+            RC(1,0) RC(1,1) RC(1,2)
+         >
+     }
+ 
+ };
