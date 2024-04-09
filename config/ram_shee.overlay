@@ -1,3 +1,5 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+
 / {
     chosen {
         zmk,kscan = &kscan0;
@@ -9,14 +11,14 @@
         wakeup-source;
 
         col-gpios
-            = <&rpi_pico 19 GPIO_ACTIVE_HIGH>
-            , <&rpi_pico 20 GPIO_ACTIVE_HIGH>
-            , <&rpi_pico 21 GPIO_ACTIVE_HIGH>
+            = <&pico_header 19 GPIO_ACTIVE_HIGH>
+            , <&pico_header 20 GPIO_ACTIVE_HIGH>
+            , <&pico_header 21 GPIO_ACTIVE_HIGH>
             ;
 
         row-gpios
-            = <&rpi_pico 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&rpi_pico 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            = <&pico_header 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&pico_header 11 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
             ;
     };
 };
